@@ -1,5 +1,7 @@
 # Gangline
 
+![Gangline — a team of harnessed workers connected by one glowing line, driven by a human musher](gangline.png)
+
 **An operating system for teams of humans and coding agents.**
 
 In dog sledding, the *gangline* is the central line that connects every dog's harness to the sled. A harness makes one dog useful; the gangline makes them a team. The AI world has spent years building better harnesses — Claude Code, Codex, Cursor, subagent packs. Gangline is the layer above: the line that connects many harnessed workers — human and AI — into one team pulling one load.
@@ -53,6 +55,10 @@ The file board is perfect for one person and one machine. When a **team** shows 
 
 That's the upgrade to **Musher** — the same operating model with the board promoted into a shared database: a web app for humans (no git, no CLI) and a `musher` CLI for agents, one source of truth under one permission model. The playbook, the rubric, the templates, and the sub-agents are unchanged — only where the board *lives* changes. See [management/pm-playbook.md → "Graduate to a team board"](management/pm-playbook.md).
 
+## Author
+
+Built by **Kevin Nguyen** ([@bangnguyenanh](https://github.com/bangnguyenanh)).
+
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT © 2026 Kevin Nguyen — see [LICENSE](LICENSE).
