@@ -1,0 +1,18 @@
+# OS / editor cruft
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# Secrets / local config
+.env
+.env.*
+!.env.example
+
+# Agent-local state
+.claude/settings.local.json
+
+# Dependencies / build output (per sub-project)
+node_modules/
+dist/
+build/
