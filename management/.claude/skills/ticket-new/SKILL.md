@@ -9,10 +9,10 @@ The playbook's scoping rules are exactly the ones that get skipped under momentu
 
 ## Procedure
 
-1. **Search before you open.** Scan `backlog/STATUS.md` — the **Open**, **Awaiting Owner**, and **Epics** sections — for the same surface/feature/bug. Then grep the folders: `grep -ril <keyword> backlog/ bugs/`.
+1. **Search before you open.** Scan `backlog/STATUS.md` (or `bugs/STATUS.md` for a bug) — the **Open**, **Awaiting Owner**, and **Epics** sections — for the same surface/feature/bug. Then grep both folders: `grep -ril <keyword> backlog/ bugs/`.
    - If a related ticket exists → **extend it or add a phase. Do not open a sibling.** Report the match and stop for the Owner's call unless it's an obvious phase.
    - If it belongs under an Epic → attach it there, don't spawn a loose sibling.
-2. **Derive the next ID from the folder, never from STATUS.** `ls backlog/ | sort | tail -1` → increment. STATUS.md is hand-maintained and lags; trusting it for IDs risks a collision.
+2. **Derive the next ID from the folder, never from STATUS.** `ls backlog/ | grep -E '^[0-9]{4}' | sort | tail -1` → increment. The `grep` skips `STATUS.md`, which otherwise sorts last and hands you it as the "previous" ID; empty output = no tickets yet, so start at `0001`. STATUS.md is hand-maintained and lags; trusting it for IDs risks a collision.
 3. **Pick the template** from `templates/ticket.md`: the **light** template for small items, the **PRD-style** template for meaty / multi-phase ones.
 4. **Run the 4-signal autonomy rubric** (pm-playbook → "Autonomy rubric"):
    - **Blast radius** — 1 surface = auto · cross-surface = ask

@@ -62,7 +62,7 @@ The PM auto-persists and starts work only when **all four** signals pass. Any fa
 
 - **Search before open.** Scan `STATUS.md` (Open + Awaiting Owner + Epics) for the same surface/feature/bug; grep the folder if unsure (`grep -ril <keyword> backlog/ bugs/`). Extend or add a phase; don't open a sibling.
 - **One ticket = one coherent work item.** If the title needs "and" or commas, split it. Multi-step within one unit = phases in the body.
-- **Derive the next ID from the folder, not STATUS.** `ls backlog/ | sort | tail -1` — STATUS.md is hand-maintained and lags, so trusting it for IDs risks a collision.
+- **Derive the next ID from the folder, not STATUS.** `ls backlog/ | grep -E '^[0-9]{4}' | sort | tail -1` — the `grep` skips `STATUS.md` (which sorts last and would hand you the wrong "previous" ID); STATUS.md is hand-maintained and lags, so trusting it for IDs risks a collision.
 - **No scope creep inside a ticket.** Mid-execution observations go to a NEW ticket (or an "Out of scope" note), never silently folded in.
 - **Spec changes after a consumer exists are contract changes.** Always ask.
 

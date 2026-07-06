@@ -4,7 +4,7 @@
 
 > Before opening a new ticket: scan **Open + Awaiting Owner + Epics** for the same surface/feature. If a related one exists, extend it or add a phase — don't open a sibling. (pm-playbook → "Scoping discipline".)
 >
-> Derive the next ID from the folder (`ls backlog/ | sort | tail -1`), not from this file — it is hand-maintained and lags.
+> Derive the next ID from the folder (`ls backlog/ | grep -E '^[0-9]{4}' | sort | tail -1` — the grep skips this file), not from this file — it is hand-maintained and lags.
 
 ## Open — needs work
 

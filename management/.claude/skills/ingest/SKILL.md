@@ -22,11 +22,10 @@ Bring a pre-existing pile of docs into the workspace shape (`backlog/`, `bugs/`,
    - `bugs/` — a defect / something broken.
    - `decisions/` — a *"why we chose X over Y"* — durable rationale. An ADR.
    - `projects/<name>/documents/` — durable spec / architecture / convention that belongs *next to a surface's code*.
-   - `platform/` (if present) — product/system truth that spans surfaces.
    - **Drop** — noise, duplicates, obsolete, or empty. Dropping is a valid outcome; a pile always has some.
 3. **Propose the mapping and STOP.** Emit a table — `source file → target path → bucket → one-line rationale` — plus a short list of everything dropped (with why) and everything **ambiguous** (the Owner should eyeball these). Do not write a single file yet. Wait for the Owner's go.
 4. **On approval, write:**
-   - Allocate IDs from the folder, not from STATUS: `ls backlog/ | sort | tail -1` → next `NNNN`. Same for `bugs/`.
+   - Allocate IDs from the folder, not from STATUS: `ls backlog/ | grep -E '^[0-9]{4}' | sort | tail -1` → next `NNNN` (the `grep` skips `STATUS.md`). Same for `bugs/`.
    - Fill each new ticket/ADR from the templates (`templates/ticket.md`, `decisions/README.md`). Preserve the source's original date and a provenance line (`Ingested from: <original path>`) so nothing is silently rewritten history.
    - Don't invent a `Status` or `Priority` you can't infer — mark `UNKNOWN — Owner to set` rather than guessing.
    - Rebuild `backlog/STATUS.md` and `bugs/STATUS.md` from the folder once all files are written (see `board-doctor` — reuse its reconcile step).
