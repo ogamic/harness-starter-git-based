@@ -1,6 +1,8 @@
 # Skills
 
-Packaged procedures the PM agent invokes by name. These are **not** conveniences — each one exists to enforce a rule from [pm-playbook.md](../../pm-playbook.md) that's easy to skip when you're moving fast.
+Packaged procedures the PM agent invokes by name. These are **not** conveniences — each one exists to enforce a rule from [pm-playbook.md](../pm-playbook.md) that's easy to skip when you're moving fast.
+
+This folder is the **source**. `scripts/sync-agents.mjs` copies each skill listed in [`agents/manifest.json`](../agents/manifest.json) verbatim into `.claude/skills/`, `.codex/skills/`, and `.agents/skills/` — edit here, re-run the generator, commit both. (This README is documentation, not a skill; it is deliberately absent from the manifest and is not copied.)
 
 **A skill earns a slot only if it encodes a rule people (and agents) reliably get wrong.** A wrapper around something the playbook already makes obvious is bloat — Gangline is an operating model, not a parts catalog. When you add a skill, name the playbook rule it protects; if you can't, it doesn't belong here.
 

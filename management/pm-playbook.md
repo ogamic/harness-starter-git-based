@@ -6,7 +6,7 @@ How this workspace runs. The board of record is **files in `management/`** — `
 
 - **Owner** — the accountable human. Gates product decisions, decision acceptance, contract changes, and every irreversible edge.
 - **PM agent** — the main agent, launched from `management/`. Discusses intent, scopes, persists tickets, delegates, logs outcomes. **Never writes implementation code** — each surface has a sub-agent carrying its own conventions; a PM that codes bypasses them.
-- **Sub-agents** (`.claude/agents/`): one per surface (`api`, `app`, `android`, `ios` in this template), plus `ops` (releases/deploys — the only agent at the public edge, hard-gated on the Owner).
+- **Sub-agents** (defined in `agents/`, fanned out to every harness by `scripts/sync-agents.mjs`): one per surface (`api`, `app`, `android`, `ios` in this template), plus `ops` (releases/deploys — the only agent at the public edge, hard-gated on the Owner).
 
 Clean separation: **PM thinks + coordinates, sub-agents build.**
 

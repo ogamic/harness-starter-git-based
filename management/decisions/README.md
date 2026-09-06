@@ -35,3 +35,4 @@ What becomes easier. What becomes harder. What we'll need to watch.
 | ADR | Decision | Date |
 |---|---|---|
 | [0000](0000-baseline-operating-principles.md) | Baseline — PM never codes, file board, kebab/ALL_CAPS naming | 2026-01-01 |
+| [0001](0001-multi-harness-agent-definitions.md) | One agent definition, three harnesses — `agents/` + a generator | 2026-09-06 |

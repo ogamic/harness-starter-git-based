@@ -1,0 +1,51 @@
+{
+  "_comment": "Tool-neutral agent registry. Bodies live in agents/<name>.md. Run `node scripts/sync-agents.mjs` after editing either, then commit the generated .claude/ .codex/ .agents/ output.",
+  "agents": [
+    {
+      "name": "android",
+      "description": "Use this agent for the Android client at ../projects/android — Kotlin · Jetpack Compose · MVVM. Owns screens, view-models, and unit tests. Do NOT use for the backend (api), the web client (app), the iOS client (ios), the hub, or the board.",
+      "codex": {
+        "model_reasoning_effort": "high",
+        "sandbox_mode": "workspace-write"
+      }
+    },
+    {
+      "name": "api",
+      "description": "Use this agent for the backend service at ../projects/api — Node · Express · Postgres. Owns endpoints, schema and migrations, auth, business logic, and backend tests. Do NOT use for the web client (app), the mobile clients (android/ios), the hub, or the board.",
+      "codex": {
+        "model_reasoning_effort": "high",
+        "sandbox_mode": "workspace-write"
+      }
+    },
+    {
+      "name": "app",
+      "description": "Use this agent for the web client at ../projects/app — React · Vite · Tailwind. Owns routes, components, client state, and view-level tests. Do NOT use for the backend (api), the mobile clients (android/ios), the hub, or the board.",
+      "codex": {
+        "model_reasoning_effort": "high",
+        "sandbox_mode": "workspace-write"
+      }
+    },
+    {
+      "name": "ios",
+      "description": "Use this agent for the iOS client at ../projects/ios — Swift · SwiftUI · async/await. Owns views, view-models, and unit tests. Do NOT use for the backend (api), the web client (app), the Android client (android), the hub, or the board.",
+      "codex": {
+        "model_reasoning_effort": "high",
+        "sandbox_mode": "workspace-write"
+      }
+    },
+    {
+      "name": "ops",
+      "description": "Use this agent for releases, deploys, and anything at the public edge — production deploys, DNS/domain changes, published packages/registries, making a repo public, destructive migrations. The ONLY agent that touches the public edge, and every irreversible action is hard-gated on the Owner's explicit, per-action go. It does NOT write feature code — it ships what the surface agents built.",
+      "codex": {
+        "model_reasoning_effort": "high",
+        "sandbox_mode": "danger-full-access"
+      }
+    }
+  ],
+  "skills": [
+    "board-doctor",
+    "ingest",
+    "ticket-close",
+    "ticket-new"
+  ]
+}

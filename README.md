@@ -15,6 +15,7 @@ Gangline is a **workspace-level operating model** for human + agent teams:
 - **A PM agent that never codes.** One agent coordinates — it discusses intent, scopes work into tickets, and delegates execution to domain sub-agents, one per surface. It never edits source directly; each sub-agent carries its own conventions.
 - **An org chart for agents.** Domain sub-agents execute; the human owner gates the decisions that are genuinely theirs. Who may act without asking is written down, versioned, and reviewable.
 - **A board that's just files.** Tickets, bugs, and decisions are numbered markdown files in this repo, indexed by a `STATUS.md` you can read in any editor. No database, no service, no account — `git` is the whole backend.
+- **One definition, every harness.** Roles and skills are written once, harness-neutral, and generated into **Claude Code, Codex, and Antigravity** config by `node management/scripts/sync-agents.mjs`. Switch tools — or run two at once, one per worktree — without rewriting your org chart.
 
 It is **not** a framework you install into a single codebase, not a persona theater that role-plays an agile team, and not a subagent parts catalog. Gangline assumes your harnesses already work; it organizes them.
 
@@ -28,7 +29,7 @@ git clone <your-workspace> my-workspace && cd my-workspace/management
 #    open your coding agent (e.g. Claude Code) HERE, in management/
 ```
 
-`management/` is the hub — the PM agent's home. Start with **[management/README.md](management/README.md)** and **[management/pm-playbook.md](management/pm-playbook.md)** (the operating model: flow, autonomy rubric, evidence bar).
+`management/` is the hub — the PM agent's home. Start with **[management/AGENTS.md](management/AGENTS.md)** and **[management/pm-playbook.md](management/pm-playbook.md)** (the operating model: flow, autonomy rubric, evidence bar).
 
 The board is already here — no setup:
 
@@ -43,9 +44,19 @@ The PM opens a ticket by writing `management/backlog/NNNN-slug.md`, updates the 
 ## What's in this template
 
 ```
-management/   ← the hub: launch your agent here (CLAUDE.md, pm-playbook.md, board, sub-agents)
+management/   ← the hub: launch your agent here
+  AGENTS.md         the operating contract, harness-neutral   ┐
+  CLAUDE.md         one line: imports AGENTS.md               │
+  pm-playbook.md    flow, autonomy rubric, evidence bar       │ source —
+  agents/           role prompts + manifest.json              │ edit these
+  skills/           packaged procedures the PM invokes        │
+  scripts/          sync-agents.mjs — the generator           ┘
+  backlog/ bugs/ decisions/   the board
+  .claude/ .codex/ .agents/   generated harness config (committed, never hand-edited)
 projects/     ← worked example stubs (api / app / android / ios), each documenting itself
 ```
+
+Edit a role in `management/agents/`, run `node management/scripts/sync-agents.mjs`, and Claude Code, Codex, and Antigravity all pick it up — `--check` fails the build if they've drifted.
 
 `projects/api`, `projects/app`, `projects/android`, and `projects/ios` are **worked example stubs** — keep them to learn the pattern, or replace them with your own (each as its own repo). Each carries its own `documents/` (architecture, conventions, response-format) — the spec its sub-agent builds against.
 

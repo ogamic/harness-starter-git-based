@@ -9,8 +9,10 @@
 .env.*
 !.env.example
 
-# Agent-local state
-.claude/settings.local.json
+# ── Machine-local harness settings ──
+# Matched at any depth: the harness dirs live under management/, not the repo root.
+**/.claude/settings.local.json
+**/.codex/config.local.toml
 
 # Dependencies / build output (per sub-project)
 node_modules/
