@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gangline — Many harnesses. One line.</title>
+<meta name="description" content="A git-based starter for running a team of coding agents: a PM agent that never codes, one sub-agent per surface, a board that's just files, and one role definition generated for Claude Code, Codex and Antigravity.">
+<meta name="author" content="Kevin Nguyen">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f3f6f9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0c1218" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://ogamic.github.io/harness-starter-git-based/">
+<link rel="alternate" hreflang="en" href="https://ogamic.github.io/harness-starter-git-based/">
+<link rel="alternate" hreflang="vi" href="https://ogamic.github.io/harness-starter-git-based/vi/">
+<link rel="alternate" hreflang="x-default" href="https://ogamic.github.io/harness-starter-git-based/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gangline">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="vi_VN">
+<meta property="og:title" content="Gangline — Many harnesses. One line.">
+<meta property="og:description" content="An operating system for teams of humans and coding agents. A PM agent that never codes, a board that's just files, and one definition for every harness.">
+<meta property="og:url" content="https://ogamic.github.io/harness-starter-git-based/">
+<meta property="og:image" content="https://ogamic.github.io/harness-starter-git-based/gangline.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="658">
+<meta property="og:image:alt" content="A team of harnessed sled dogs pulling as one, with a human musher holding the line">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Gangline — Many harnesses. One line.">
+<meta name="twitter:description" content="A git-based starter for running a team of coding agents across Claude Code, Codex and Antigravity.">
+<meta name="twitter:image" content="https://ogamic.github.io/harness-starter-git-based/gangline.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #f3f6f9;
+    --surface: #ffffff;
+    --surface-2: #e9eef3;
+    --ink: #121b24;
+    --muted: #536273;
+    --line: #d5dde6;
+    --amber: #d98a1c;
+    --amber-ink: #9a5800;
+    --amber-soft: rgba(217, 138, 28, .14);
+    --btn-ink: #ffffff;
+    --btn-bg: #121b24;
+    --shadow: 0 1px 2px rgba(18, 27, 36, .06), 0 8px 24px rgba(18, 27, 36, .06);
+    --radius: 14px;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0c1218;
+      --surface: #131b24;
+      --surface-2: #1a2430;
+      --ink: #e6edf3;
+      --muted: #97a6b6;
+      --line: #263341;
+      --amber: #f3a93b;
+      --amber-ink: #f6b95c;
+      --amber-soft: rgba(243, 169, 59, .14);
+      --btn-ink: #0c1218;
+      --btn-bg: #f3a93b;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .25);
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.6 var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--amber-ink); }
+  a:focus-visible, .btn:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
+  code { font-family: var(--mono); font-size: .9em; background: var(--surface-2); padding: .1em .35em; border-radius: 5px; overflow-wrap: anywhere; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+  @media (min-width: 720px) { .wrap { padding: 0 32px; } }
+
+  /* Nav */
+  .nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 0; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -.01em; color: var(--ink); text-decoration: none; }
+  .brand-mark { width: 26px; height: 10px; position: relative; }
+  .brand-mark::before { content: ""; position: absolute; left: 0; right: 0; top: 4px; height: 2px; background: var(--amber); border-radius: 2px; box-shadow: 0 0 8px var(--amber); }
+  .brand-mark::after { content: ""; position: absolute; top: 2px; left: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--amber); box-shadow: 10px 0 0 var(--amber), 20px 0 0 var(--amber); }
+  .nav-links { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 6px 18px; font-size: 14px; }
+  .nav-links a { color: var(--muted); text-decoration: none; }
+  .nav-links a:hover { color: var(--ink); }
+  .lang { display: inline-flex; align-items: center; gap: 6px; font: 500 12px/1 var(--mono); letter-spacing: .04em; padding: 6px 9px; border: 1px solid var(--line); border-radius: 999px; }
+  .lang a { color: var(--muted); }
+  .lang a[aria-current="page"] { color: var(--amber-ink); font-weight: 600; }
+  .lang .sep { color: var(--line); }
+
+  /* Hero */
+  .hero { padding-top: 36px; padding-bottom: 28px; text-align: center; }
+  .eyebrow { display: inline-block; font: 500 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--amber-ink); background: var(--amber-soft); padding: 7px 10px; border-radius: 999px; }
+  h1 { font-size: clamp(40px, 9vw, 76px); line-height: 1.02; letter-spacing: -.035em; font-weight: 800; margin: 20px 0 16px; text-wrap: balance; }
+  h1 .glow { color: var(--amber-ink); }
+  .gloss { font-size: clamp(17px, 2.6vw, 21px); font-weight: 600; color: var(--ink); margin: -6px 0 14px; }
+  .lede { font-size: clamp(17px, 2.4vw, 20px); color: var(--muted); max-width: 640px; margin: 0 auto; text-wrap: pretty; }
+  .ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 28px 0 0; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; padding: 0 20px; border-radius: 10px; font-weight: 600; font-size: 15px; text-decoration: none; border: 1px solid var(--line); color: var(--ink); background: var(--surface); }
+  .btn:hover { border-color: var(--muted); }
+  .btn.primary { background: var(--btn-bg); color: var(--btn-ink); border-color: transparent; }
+  .btn.primary:hover { filter: brightness(1.12); }
+  @media (max-width: 480px) { .ctas .btn { width: 100%; } }
+  .hero-img { margin: 40px 0 0; }
+  .hero-img img { display: block; width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--line); box-shadow: var(--shadow); }
+  .hero-img figcaption { font-size: 13px; color: var(--muted); margin-top: 10px; }
+
+  /* Sections */
+  section { padding: 56px 0; }
+  .sec-head { max-width: 680px; margin-bottom: 28px; }
+  h2 { font-size: clamp(26px, 4.5vw, 36px); line-height: 1.15; letter-spacing: -.025em; margin: 0 0 10px; }
+  .sec-head p { color: var(--muted); margin: 0; }
+  h3 { font-size: 17px; margin: 0 0 6px; letter-spacing: -.01em; }
+
+  .pitch { border-top: 1px solid var(--line); }
+  .pitch p { font-size: 18px; max-width: 760px; margin: 0 0 14px; }
+  .pitch p.muted { color: var(--muted); font-size: 16px; }
+
+  .grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+  .grid > *, .diagram > * { min-width: 0; }
+  @media (min-width: 720px) { .grid.two { grid-template-columns: 1fr 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); }
+  .card p { margin: 0; color: var(--muted); }
+  .num { font: 500 12px/1 var(--mono); color: var(--amber-ink); margin-bottom: 12px; display: block; }
+
+  /* How it works — flow */
+  .flow { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+  .flow li { position: relative; padding: 0 0 26px 40px; }
+  .flow li::before { content: ""; position: absolute; left: 8px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 0 4px var(--amber-soft), 0 0 12px var(--amber); }
+  .flow li::after { content: ""; position: absolute; left: 13px; top: 22px; bottom: 0; width: 2px; background: linear-gradient(var(--amber), var(--amber-soft)); }
+  .flow li:last-child { padding-bottom: 0; }
+  .flow li:last-child::after { display: none; }
+  .flow p { margin: 0; color: var(--muted); }
+
+  /* Generator diagram */
+  .diagram { display: grid; gap: 14px; align-items: center; grid-template-columns: 1fr; }
+  @media (min-width: 820px) { .diagram { grid-template-columns: 1fr auto 1fr; } }
+  .box { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+  .box .label { font: 500 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; display: block; }
+  .files { font-family: var(--mono); font-size: 13px; line-height: 1.8; margin: 0; padding: 0; list-style: none; overflow-wrap: anywhere; }
+  .files span { color: var(--muted); font-family: var(--sans); font-size: 12px; margin-left: 6px; }
+  .arrow { text-align: center; font: 500 13px/1.3 var(--mono); color: var(--amber-ink); padding: 4px 0; }
+  .arrow .line { display: block; margin: 8px auto; width: 2px; height: 28px; background: var(--amber); box-shadow: 0 0 8px var(--amber); }
+  @media (min-width: 820px) { .arrow .line { width: 64px; height: 2px; } }
+  .targets { display: grid; gap: 10px; }
+  .target { background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--amber); border-radius: 10px; padding: 12px 14px; }
+  .target strong { display: block; font-size: 15px; }
+  .target code { background: none; padding: 0; color: var(--muted); font-size: 12.5px; }
+  .note { margin-top: 18px; color: var(--muted); font-size: 14px; }
+
+  /* Terminal */
+  pre.term { margin: 0; background: #0f1720; color: #dbe4ec; border-radius: var(--radius); padding: 18px 20px; font: 13.5px/1.7 var(--mono); overflow-x: auto; border: 1px solid #22303e; }
+  @media (max-width: 480px) { pre.term { font-size: 12px; padding: 16px; } }
+  pre.term .c { color: #7f8fa0; }
+  pre.term .p { color: #f3a93b; }
+
+  /* Fit */
+  .fit .card h3 { display: flex; gap: 8px; align-items: baseline; }
+
+  /* Final CTA */
+  .final { text-align: center; border-top: 1px solid var(--line); }
+  .final h2 { margin-bottom: 8px; }
+  .final p { color: var(--muted); margin: 0 auto; max-width: 560px; }
+
+  footer { border-top: 1px solid var(--line); padding: 28px 0 40px; font-size: 14px; color: var(--muted); }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: center; text-align: center; }
+  footer a { color: var(--muted); }
+
+  .tag { font: 500 11px/1 var(--mono); letter-spacing: .04em; text-transform: uppercase; color: var(--amber-ink); background: var(--amber-soft); padding: 5px 8px; border-radius: 999px; }
+
+  /* Pain */
+  .pain { border-top: 1px solid var(--line); }
+  .pain-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; grid-template-columns: 1fr; }
+  @media (min-width: 720px) { .pain-list { grid-template-columns: 1fr 1fr; } .pain-list li:last-child:nth-child(odd) { grid-column: 1 / -1; } }
+  .pain-list li { min-width: 0; background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--muted); border-radius: 10px; padding: 14px 16px; font-size: 16px; line-height: 1.5; }
+  .bridge { margin: 24px 0 0; max-width: 720px; color: var(--muted); }
+  .bridge strong { color: var(--ink); font-weight: 600; }
+  .answers { display: block; margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line); font: 500 12px/1.5 var(--mono); color: var(--amber-ink); }
+</style>
+</head>
+<body>
+
+<header class="wrap nav">
+  <a class="brand" href="./" aria-label="Gangline home"><span class="brand-mark" aria-hidden="true"></span>Gangline</a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="https://github.com/ogamic/harness-starter-git-based/wiki/Quickstart">Docs</a>
+    <a href="https://github.com/ogamic/harness-starter-git-based">GitHub</a>
+    <span class="lang" role="group" aria-label="Language"><a href="./" hreflang="en" lang="en" aria-current="page">EN</a><span class="sep" aria-hidden="true">·</span><a href="vi/" hreflang="vi" lang="vi">VI</a></span>
+  </nav>
+</header>
+
+<main>
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <span class="eyebrow">Git-based starter template</span>
+    <h1 id="hero-title">Many harnesses.<br><span class="glow">One line.</span></h1>
+    <p class="lede">An operating system for teams of humans and coding agents. One PM agent scopes and delegates, one sub-agent per surface builds, and the whole board lives in your repo as markdown.</p>
+    <div class="ctas">
+      <a class="btn primary" href="https://github.com/ogamic/harness-starter-git-based/generate">Use this template</a>
+      <a class="btn" href="https://github.com/ogamic/harness-starter-git-based/wiki/Quickstart">Read the Quickstart</a>
+      <a class="btn" href="https://github.com/ogamic/harness-starter-git-based">View on GitHub</a>
+    </div>
+    <figure class="hero-img">
+      <img src="gangline.png" width="1200" height="658" alt="A team of harnessed sled dogs pulling as one, with a human musher holding the line">
+      <figcaption>A harness lets a dog pull. The gangline, and the musher holding it, decide where the team goes.</figcaption>
+    </figure>
+  </section>
+
+  <section class="pain" aria-labelledby="pain-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="pain-title">Sound familiar?</h2>
+        <p>Coding agents are good at the task in front of them. What breaks is everything around it.</p>
+      </div>
+      <ul class="pain-list">
+        <li>You come back after three weeks, and nobody — not you, not the agent — remembers why it was built this way.</li>
+        <li>You asked an agent to plan. It also rewrote the code, past the conventions that part of the codebase follows.</li>
+        <li>An agent went ahead on a call that was yours to make.</li>
+        <li>The agent says done. Nothing proves it.</li>
+        <li>Your Claude Code setup and your Codex setup quietly say different things.</li>
+      </ul>
+      <p class="bridge">These are team problems, and they show up on day one even when you work alone: <strong>you-in-three-weeks is a teammate with no memory.</strong> Each idea below answers one of them.</p>
+    </div>
+  </section>
+
+  <section class="pitch" aria-labelledby="pitch-title">
+    <div class="wrap">
+      <h2 id="pitch-title">Your harness runs the agents. Gangline runs the work.</h2>
+      <p>Claude Code and Codex can already run many agents at once: subagents, parallel sessions. What they don't give you is the team around them. Who plans and who builds. Which calls wait for you. What counts as done. Where the decision from three weeks ago is written down.</p>
+      <p>Gangline keeps those answers as files in your repo. Each role is generated into every tool's own subagents (skills in Antigravity), and the board records every ticket, decision and result. Switch tools, close the session, come back in a month, and the team is still there.</p>
+      <p class="muted">It isn't a framework you install into a codebase, a persona theater that role-plays an agile team, or a catalog of subagent parts. It doesn't replace your harness's agents. It decides who does what, what waits for you, and what counts as done.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="pillars-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="pillars-title">Four ideas, all in plain files</h2>
+      </div>
+      <div class="grid two">
+        <article class="card">
+          <span class="num">01</span>
+          <h3>A PM agent that never codes</h3>
+          <p>One agent coordinates. It discusses intent, scopes work into tickets, and delegates to domain sub-agents, one per surface. It never edits source, and each sub-agent carries its own conventions.</p>
+          <span class="answers">Answers: the planner that also rewrote the code.</span>
+        </article>
+        <article class="card">
+          <span class="num">02</span>
+          <h3>An org chart for agents</h3>
+          <p>Sub-agents execute; you gate the decisions that are really yours. Who may act without asking, and what counts as done, is written down, versioned and reviewable.</p>
+          <span class="answers">Answers: the agent that made your call · “done” with no proof.</span>
+        </article>
+        <article class="card">
+          <span class="num">03</span>
+          <h3>A board that's just files</h3>
+          <p>Tickets, bugs and decisions are numbered markdown files, indexed by a <code>STATUS.md</code> you can read in any editor. No database, no service, no account. <code>git</code> is the whole backend.</p>
+          <span class="answers">Answers: nobody remembering why.</span>
+        </article>
+        <article class="card">
+          <span class="num">04</span>
+          <h3>One definition, every harness</h3>
+          <p>Roles and skills are written once and generated into Claude Code, Codex and Antigravity config. Switch tools, or run two at once in separate worktrees, without rewriting your org chart.</p>
+          <span class="answers">Answers: two setups that quietly drift apart.</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="how-title" style="background: var(--surface-2);">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="how-title">How it works</h2>
+        <p>You talk to one agent, launched in <code>management/</code>. Everything it does leaves a file behind.</p>
+      </div>
+      <div class="grid two">
+        <ol class="flow">
+          <li><h3>You state the intent</h3><p>"Users should be able to export their data." The PM discusses, investigates and drafts a plan.</p></li>
+          <li><h3>The PM searches the board</h3><p>It checks <code>STATUS.md</code> for related work and extends an existing ticket rather than opening a duplicate.</p></li>
+          <li><h3>The autonomy rubric decides</h3><p>Four signals: blast radius, change type, product decision, contract. All clear, and it starts. Any fails, and it waits for your go.</p></li>
+          <li><h3>A ticket file becomes the spec</h3><p>It writes <code>backlog/NNNN-slug.md</code>, adds the row to <code>STATUS.md</code>, and hands the file to the owning sub-agent.</p></li>
+          <li><h3>Done means evidence</h3><p>Build and tests with counts, behavior observed where it runs, and a harness delta: what this ticket taught the system.</p></li>
+        </ol>
+        <div>
+          <pre class="term" aria-label="Repository layout"><span class="c"># your workspace</span>
+management/        <span class="c">← launch your agent here</span>
+  AGENTS.md        <span class="c">the operating contract</span>
+  CLAUDE.md        <span class="c">imports AGENTS.md</span>
+  pm-playbook.md   <span class="c">flow · rubric · evidence</span>
+  agents/          <span class="c">role prompts + manifest</span>
+  skills/          <span class="c">ticket-new · ticket-close ·</span>
+                   <span class="c">board-doctor · ingest</span>
+  backlog/ bugs/ decisions/
+projects/          <span class="c">one folder per surface</span>
+  api/ app/ android/ ios/</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="gen-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="gen-title">Write a role once. Every harness loads it.</h2>
+        <p>A small, dependency-free Node script fans your roles and skills out to each tool's own format. The output is committed, so you can review exactly what each harness will load.</p>
+      </div>
+      <div class="diagram" role="img" aria-label="Source files in agents/ and skills/ flow through sync-agents.mjs into Claude Code, Codex and Antigravity config folders">
+        <div class="box">
+          <span class="label">Source · you edit</span>
+          <ul class="files">
+            <li>AGENTS.md</li>
+            <li>agents/manifest.json</li>
+            <li>agents/&lt;name&gt;.md</li>
+            <li>skills/&lt;name&gt;/SKILL.md</li>
+          </ul>
+        </div>
+        <div class="arrow" aria-hidden="true">sync-agents.mjs<span class="line"></span></div>
+        <div class="targets">
+          <div class="target"><strong>Claude Code</strong><code>.claude/agents/ · .claude/skills/</code></div>
+          <div class="target"><strong>Codex</strong><code>.codex/agents/*.toml · .codex/skills/</code></div>
+          <div class="target"><strong>Antigravity</strong><code>.agents/skills/ (roles become skills)</code></div>
+        </div>
+      </div>
+      <p class="note">Run <code>node scripts/sync-agents.mjs --check</code> in CI or a pre-commit hook: it exits non-zero when the generated config has drifted from the source.</p>
+    </div>
+  </section>
+
+  <section class="fit" aria-labelledby="fit-title" style="padding-top: 0;">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="fit-title">Start with files. Graduate when a team shows up.</h2>
+      </div>
+      <div class="grid two">
+        <article class="card">
+          <h3>This starter</h3>
+          <p>Free and fully open. One person, one machine. The board is markdown in git, with nothing to host and no account to create.</p>
+        </article>
+        <article class="card">
+          <h3>Musher <span class="tag">in early testing</span></h3>
+          <p>The team version, for when a second person, parallel agents or a need for permissions shows up. It's still an experiment. The playbook, rubric and sub-agents are meant to stay the same; only where the board lives changes.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="final" aria-labelledby="final-title">
+    <div class="wrap">
+      <h2 id="final-title">Give your agents a team to work in</h2>
+      <p>Create your workspace from the template, open your coding agent in <code>management/</code>, and file your first ticket.</p>
+      <div class="ctas">
+        <a class="btn primary" href="https://github.com/ogamic/harness-starter-git-based/generate">Use this template</a>
+        <a class="btn" href="https://github.com/ogamic/harness-starter-git-based/wiki/Quickstart">Read the Quickstart</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>MIT License © 2026 Kevin Nguyen · <a href="https://hikevin.me">hikevin.me</a></span>
+    <span><a href="https://github.com/ogamic/harness-starter-git-based">github.com/ogamic/harness-starter-git-based</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

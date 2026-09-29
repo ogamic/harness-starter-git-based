@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gangline — Many harnesses. One line.</title>
+<meta name="description" content="Tổ chức Claude Code, Codex và Antigravity thành một đội, bằng file trong Git.">
+<meta name="author" content="Kevin Nguyen">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f3f6f9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0c1218" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://ogamic.github.io/harness-starter-git-based/vi/">
+<link rel="alternate" hreflang="en" href="https://ogamic.github.io/harness-starter-git-based/">
+<link rel="alternate" hreflang="vi" href="https://ogamic.github.io/harness-starter-git-based/vi/">
+<link rel="alternate" hreflang="x-default" href="https://ogamic.github.io/harness-starter-git-based/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gangline">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:title" content="Gangline — Many harnesses. One line.">
+<meta property="og:description" content="Hệ điều hành cho một đội gồm cả người và coding agent. Một PM agent điều phối việc, board chỉ là các file, một định nghĩa cho mọi harness.">
+<meta property="og:url" content="https://ogamic.github.io/harness-starter-git-based/vi/">
+<meta property="og:image" content="https://ogamic.github.io/harness-starter-git-based/gangline.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="658">
+<meta property="og:image:alt" content="Đàn chó kéo xe mang harness cùng kéo một cỗ xe, người lái giữ dây kéo">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Gangline — Many harnesses. One line.">
+<meta name="twitter:description" content="Tổ chức Claude Code, Codex và Antigravity thành một đội, bằng file trong Git.">
+<meta name="twitter:image" content="https://ogamic.github.io/harness-starter-git-based/gangline.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #f3f6f9;
+    --surface: #ffffff;
+    --surface-2: #e9eef3;
+    --ink: #121b24;
+    --muted: #536273;
+    --line: #d5dde6;
+    --amber: #d98a1c;
+    --amber-ink: #9a5800;
+    --amber-soft: rgba(217, 138, 28, .14);
+    --btn-ink: #ffffff;
+    --btn-bg: #121b24;
+    --shadow: 0 1px 2px rgba(18, 27, 36, .06), 0 8px 24px rgba(18, 27, 36, .06);
+    --radius: 14px;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0c1218;
+      --surface: #131b24;
+      --surface-2: #1a2430;
+      --ink: #e6edf3;
+      --muted: #97a6b6;
+      --line: #263341;
+      --amber: #f3a93b;
+      --amber-ink: #f6b95c;
+      --amber-soft: rgba(243, 169, 59, .14);
+      --btn-ink: #0c1218;
+      --btn-bg: #f3a93b;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .25);
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.6 var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--amber-ink); }
+  a:focus-visible, .btn:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
+  code { font-family: var(--mono); font-size: .9em; background: var(--surface-2); padding: .1em .35em; border-radius: 5px; overflow-wrap: anywhere; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+  @media (min-width: 720px) { .wrap { padding: 0 32px; } }
+
+  /* Nav */
+  .nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 0; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -.01em; color: var(--ink); text-decoration: none; }
+  .brand-mark { width: 26px; height: 10px; position: relative; }
+  .brand-mark::before { content: ""; position: absolute; left: 0; right: 0; top: 4px; height: 2px; background: var(--amber); border-radius: 2px; box-shadow: 0 0 8px var(--amber); }
+  .brand-mark::after { content: ""; position: absolute; top: 2px; left: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--amber); box-shadow: 10px 0 0 var(--amber), 20px 0 0 var(--amber); }
+  .nav-links { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 6px 18px; font-size: 14px; }
+  .nav-links a { color: var(--muted); text-decoration: none; }
+  .nav-links a:hover { color: var(--ink); }
+  .lang { display: inline-flex; align-items: center; gap: 6px; font: 500 12px/1 var(--mono); letter-spacing: .04em; padding: 6px 9px; border: 1px solid var(--line); border-radius: 999px; }
+  .lang a { color: var(--muted); }
+  .lang a[aria-current="page"] { color: var(--amber-ink); font-weight: 600; }
+  .lang .sep { color: var(--line); }
+
+  /* Hero */
+  .hero { padding-top: 36px; padding-bottom: 28px; text-align: center; }
+  .eyebrow { display: inline-block; font: 500 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--amber-ink); background: var(--amber-soft); padding: 7px 10px; border-radius: 999px; }
+  h1 { font-size: clamp(40px, 9vw, 76px); line-height: 1.02; letter-spacing: -.035em; font-weight: 800; margin: 20px 0 16px; text-wrap: balance; }
+  h1 .glow { color: var(--amber-ink); }
+  .gloss { font-size: clamp(17px, 2.6vw, 21px); font-weight: 600; color: var(--ink); margin: -6px 0 14px; }
+  .lede { font-size: clamp(17px, 2.4vw, 20px); color: var(--muted); max-width: 640px; margin: 0 auto; text-wrap: pretty; }
+  .ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 28px 0 0; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; padding: 0 20px; border-radius: 10px; font-weight: 600; font-size: 15px; text-decoration: none; border: 1px solid var(--line); color: var(--ink); background: var(--surface); }
+  .btn:hover { border-color: var(--muted); }
+  .btn.primary { background: var(--btn-bg); color: var(--btn-ink); border-color: transparent; }
+  .btn.primary:hover { filter: brightness(1.12); }
+  @media (max-width: 480px) { .ctas .btn { width: 100%; } }
+  .hero-img { margin: 40px 0 0; }
+  .hero-img img { display: block; width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--line); box-shadow: var(--shadow); }
+  .hero-img figcaption { font-size: 13px; color: var(--muted); margin-top: 10px; }
+
+  /* Sections */
+  section { padding: 56px 0; }
+  .sec-head { max-width: 680px; margin-bottom: 28px; }
+  h2 { font-size: clamp(26px, 4.5vw, 36px); line-height: 1.15; letter-spacing: -.025em; margin: 0 0 10px; }
+  .sec-head p { color: var(--muted); margin: 0; }
+  h3 { font-size: 17px; margin: 0 0 6px; letter-spacing: -.01em; }
+
+  .pitch { border-top: 1px solid var(--line); }
+  .pitch p { font-size: 18px; max-width: 760px; margin: 0 0 14px; }
+  .pitch p.muted { color: var(--muted); font-size: 16px; }
+
+  .grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+  .grid > *, .diagram > * { min-width: 0; }
+  @media (min-width: 720px) { .grid.two { grid-template-columns: 1fr 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); }
+  .card p { margin: 0; color: var(--muted); }
+  .num { font: 500 12px/1 var(--mono); color: var(--amber-ink); margin-bottom: 12px; display: block; }
+
+  /* How it works — flow */
+  .flow { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+  .flow li { position: relative; padding: 0 0 26px 40px; }
+  .flow li::before { content: ""; position: absolute; left: 8px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 0 4px var(--amber-soft), 0 0 12px var(--amber); }
+  .flow li::after { content: ""; position: absolute; left: 13px; top: 22px; bottom: 0; width: 2px; background: linear-gradient(var(--amber), var(--amber-soft)); }
+  .flow li:last-child { padding-bottom: 0; }
+  .flow li:last-child::after { display: none; }
+  .flow p { margin: 0; color: var(--muted); }
+
+  /* Generator diagram */
+  .diagram { display: grid; gap: 14px; align-items: center; grid-template-columns: 1fr; }
+  @media (min-width: 820px) { .diagram { grid-template-columns: 1fr auto 1fr; } }
+  .box { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+  .box .label { font: 500 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; display: block; }
+  .files { font-family: var(--mono); font-size: 13px; line-height: 1.8; margin: 0; padding: 0; list-style: none; overflow-wrap: anywhere; }
+  .files span { color: var(--muted); font-family: var(--sans); font-size: 12px; margin-left: 6px; }
+  .arrow { text-align: center; font: 500 13px/1.3 var(--mono); color: var(--amber-ink); padding: 4px 0; }
+  .arrow .line { display: block; margin: 8px auto; width: 2px; height: 28px; background: var(--amber); box-shadow: 0 0 8px var(--amber); }
+  @media (min-width: 820px) { .arrow .line { width: 64px; height: 2px; } }
+  .targets { display: grid; gap: 10px; }
+  .target { background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--amber); border-radius: 10px; padding: 12px 14px; }
+  .target strong { display: block; font-size: 15px; }
+  .target code { background: none; padding: 0; color: var(--muted); font-size: 12.5px; }
+  .note { margin-top: 18px; color: var(--muted); font-size: 14px; }
+
+  /* Terminal */
+  pre.term { margin: 0; background: #0f1720; color: #dbe4ec; border-radius: var(--radius); padding: 18px 20px; font: 13.5px/1.7 var(--mono); overflow-x: auto; border: 1px solid #22303e; }
+  @media (max-width: 480px) { pre.term { font-size: 12px; padding: 16px; } }
+  pre.term .c { color: #7f8fa0; }
+  pre.term .p { color: #f3a93b; }
+
+  /* Fit */
+  .fit .card h3 { display: flex; gap: 8px; align-items: baseline; }
+
+  /* Final CTA */
+  .final { text-align: center; border-top: 1px solid var(--line); }
+  .final h2 { margin-bottom: 8px; }
+  .final p { color: var(--muted); margin: 0 auto; max-width: 560px; }
+
+  footer { border-top: 1px solid var(--line); padding: 28px 0 40px; font-size: 14px; color: var(--muted); }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: center; text-align: center; }
+  footer a { color: var(--muted); }
+
+  .tag { font: 500 11px/1 var(--mono); letter-spacing: .04em; text-transform: uppercase; color: var(--amber-ink); background: var(--amber-soft); padding: 5px 8px; border-radius: 999px; }
+
+  /* Pain */
+  .pain { border-top: 1px solid var(--line); }
+  .pain-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; grid-template-columns: 1fr; }
+  @media (min-width: 720px) { .pain-list { grid-template-columns: 1fr 1fr; } .pain-list li:last-child:nth-child(odd) { grid-column: 1 / -1; } }
+  .pain-list li { min-width: 0; background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--muted); border-radius: 10px; padding: 14px 16px; font-size: 16px; line-height: 1.5; }
+  .bridge { margin: 24px 0 0; max-width: 720px; color: var(--muted); }
+  .bridge strong { color: var(--ink); font-weight: 600; }
+  .answers { display: block; margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line); font: 500 12px/1.5 var(--mono); color: var(--amber-ink); }
+</style>
+</head>
+<body>
+
+<header class="wrap nav">
+  <a class="brand" href="./" aria-label="Trang chủ Gangline"><span class="brand-mark" aria-hidden="true"></span>Gangline</a>
+  <nav class="nav-links" aria-label="Điều hướng chính">
+    <a href="https://github.com/ogamic/harness-starter-git-based/wiki/Quickstart-vi">Tài liệu</a>
+    <a href="https://github.com/ogamic/harness-starter-git-based">GitHub</a>
+    <span class="lang" role="group" aria-label="Ngôn ngữ"><a href="../" hreflang="en" lang="en">EN</a><span class="sep" aria-hidden="true">·</span><a href="./" hreflang="vi" lang="vi" aria-current="page">VI</a></span>
+  </nav>
+</header>
+
+<main>
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <span class="eyebrow">Starter template trên nền Git</span>
+    <h1 id="hero-title" lang="en">Many harnesses.<br><span class="glow">One line.</span></h1>
+    <p class="gloss">Nhiều harness, chung một sợi dây kéo.</p>
+    <p class="lede">Hệ điều hành cho một đội gồm cả người và coding agent. Một PM agent điều phối việc, các sub-agent phụ trách từng mảng, toàn bộ board nằm trọn trong repo dưới dạng file Markdown.</p>
+    <div class="ctas">
+      <a class="btn primary" href="https://github.com/ogamic/harness-starter-git-based/generate">Dùng template này</a>
+      <a class="btn" href="https://github.com/ogamic/harness-starter-git-based/wiki/Quickstart-vi">Đọc Quickstart</a>
+      <a class="btn" href="https://github.com/ogamic/harness-starter-git-based">Xem trên GitHub</a>
+    </div>
+    <figure class="hero-img">
+      <img src="../gangline.png" width="1200" height="658" alt="Đàn chó kéo xe mang harness cùng kéo một cỗ xe, người lái giữ dây kéo">
+      <figcaption>Harness giúp chú chó kéo được. Gangline, cùng người lái giữ nó, quyết định cả đàn đi về đâu.</figcaption>
+    </figure>
+  </section>
+
+  <section class="pain" aria-labelledby="pain-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="pain-title">Nghe có quen không?</h2>
+        <p>Coding agent làm tốt việc ngay trước mắt. Thứ hay hỏng là mọi thứ xung quanh việc đó.</p>
+      </div>
+      <ul class="pain-list">
+        <li>Ba tuần sau quay lại, không ai (cả bạn lẫn agent) nhớ vì sao nó được làm theo cách này.</li>
+        <li>Bạn nhờ agent lên kế hoạch. Nó sửa luôn cả code, bỏ qua convention mà phần code đó vẫn theo.</li>
+        <li>Một agent tự ý quyết một việc lẽ ra phải do bạn quyết.</li>
+        <li>Agent báo xong. Không có gì chứng minh điều đó.</li>
+        <li>Setup Claude Code và setup Codex của bạn lặng lẽ nói hai điều khác nhau.</li>
+      </ul>
+      <p class="bridge">Đó là vấn đề của một team, và chúng xuất hiện ngay từ ngày đầu, kể cả khi bạn làm một mình: <strong>bạn của ba tuần sau là một đồng đội không có trí nhớ.</strong> Mỗi nguyên lý dưới đây giải quyết một trong số đó.</p>
+    </div>
+  </section>
+
+  <section class="pitch" aria-labelledby="pitch-title">
+    <div class="wrap">
+      <h2 id="pitch-title">Harness lo chạy agent. Gangline lo vận hành công việc.</h2>
+      <p>Claude Code hay Codex đã chạy được nhiều agent cùng lúc: sub-agent, nhiều phiên song song. Thứ chúng không cho bạn là cái team bao quanh các agent đó. Ai lên kế hoạch, ai làm. Quyết định nào phải chờ bạn. Thế nào mới tính là xong. Quyết định ba tuần trước được ghi ở đâu.</p>
+      <p>Gangline giữ những câu trả lời đó thành file trong repo của bạn. Mỗi vai trò được sinh thành sub-agent của từng công cụ (Antigravity thì thành skill), còn board ghi lại mọi ticket, quyết định và kết quả. Đổi công cụ, đóng phiên, một tháng sau quay lại, team vẫn còn nguyên.</p>
+      <p class="muted">Gangline không phải framework cài vào codebase, không phải màn đóng vai một team Agile, cũng không phải kho sub-agent. Nó không thay sub-agent của harness; nó định ra ai làm gì, việc gì chờ bạn, và thế nào là xong.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="pillars-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="pillars-title">Bốn nguyên lý, toàn bộ bằng file thuần</h2>
+      </div>
+      <div class="grid two">
+        <article class="card">
+          <span class="num">01</span>
+          <h3>PM agent không bao giờ viết code</h3>
+          <p>Chỉ làm nhiệm vụ điều phối: làm rõ yêu cầu, bóc tách ticket và giao việc cho sub-agent từng mảng. PM không sửa mã nguồn; sub-agent tự tuân thủ convention riêng.</p>
+          <span class="answers">Giải quyết: agent lên kế hoạch rồi sửa luôn code.</span>
+        </article>
+        <article class="card">
+          <span class="num">02</span>
+          <h3>Phân quyền như sơ đồ tổ chức</h3>
+          <p>Sub-agent thực thi; bạn giữ quyền quyết định then chốt. Việc gì agent được tự làm, việc gì phải hỏi bạn, và thế nào mới tính là xong: tất cả được ghi rõ, có version và review được trong Git.</p>
+          <span class="answers">Giải quyết: agent tự quyết thay bạn · “xong” mà không có bằng chứng.</span>
+        </article>
+        <article class="card">
+          <span class="num">03</span>
+          <h3>Board chỉ là các file</h3>
+          <p>Ticket, bug và quyết định kiến trúc (ADR) là các file Markdown được đánh số, index qua file <code>STATUS.md</code>. Không database, không service ngoài, không tài khoản. Git là toàn bộ backend.</p>
+          <span class="answers">Giải quyết: không ai nhớ vì sao.</span>
+        </article>
+        <article class="card">
+          <span class="num">04</span>
+          <h3>Một định nghĩa cho mọi công cụ</h3>
+          <p>Role và skill viết một lần; chạy một lệnh là sinh ra config cho Claude Code, Codex và Antigravity. Đổi công cụ, hoặc chạy hai cái song song trên hai Git worktree, mà không phải viết lại sơ đồ tổ chức.</p>
+          <span class="answers">Giải quyết: hai bộ setup lặng lẽ lệch nhau.</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="how-title" style="background: var(--surface-2);">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="how-title">Cách hoạt động</h2>
+        <p>Bạn chỉ làm việc với một PM agent trong <code>management/</code>. Mọi việc nó làm đều lưu lại thành file.</p>
+      </div>
+      <div class="grid two">
+        <ol class="flow">
+          <li><h3>Bạn nêu yêu cầu</h3><p>"Cần cho phép export dữ liệu." PM làm rõ bài toán và phác thảo kế hoạch.</p></li>
+          <li><h3>PM rà soát board</h3><p>Kiểm tra <code>STATUS.md</code> xem đã có việc liên quan chưa, cập nhật ticket sẵn có thay vì mở trùng.</p></li>
+          <li><h3>Autonomy Rubric quyết định</h3><p>4 tín hiệu: phạm vi ảnh hưởng, loại thay đổi, quyết định sản phẩm, contract. Cả bốn đều Auto thì tự làm; chỉ cần một cái không qua là dừng lại chờ bạn đồng ý.</p></li>
+          <li><h3>Ticket chính là spec</h3><p>PM tạo <code>backlog/NNNN-slug.md</code>, ghi vào <code>STATUS.md</code> và giao file cho sub-agent phụ trách.</p></li>
+          <li><h3>Xong phải có bằng chứng</h3><p>Build và test pass kèm số lượng, hành vi được kiểm chứng ở nơi nó chạy, và harness delta: ticket này dạy hệ thống điều gì.</p></li>
+        </ol>
+        <div>
+          <pre class="term" aria-label="Cấu trúc repo"><span class="c"># workspace của bạn</span>
+management/        <span class="c">← khởi chạy agent ở đây</span>
+  AGENTS.md        <span class="c">bản "hợp đồng" vận hành</span>
+  CLAUDE.md        <span class="c">import AGENTS.md</span>
+  pm-playbook.md   <span class="c">flow · rubric · bằng chứng</span>
+  agents/          <span class="c">prompt role + manifest</span>
+  skills/          <span class="c">ticket-new · ticket-close ·</span>
+                   <span class="c">board-doctor · ingest</span>
+  backlog/ bugs/ decisions/
+projects/          <span class="c">mỗi mảng một thư mục</span>
+  api/ app/ android/ ios/</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="gen-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="gen-title">Viết role một lần. Công cụ nào cũng nạp được.</h2>
+        <p>Một script Node nhỏ, không có dependency: chạy một lệnh là sinh ra config cho từng công cụ từ role và skill của bạn. File sinh ra được commit vào Git, nên bạn review được chính xác những gì mỗi bên sẽ nạp.</p>
+      </div>
+      <div class="diagram" role="img" aria-label="File nguồn trong agents/ và skills/ đi qua sync-agents.mjs để thành config cho Claude Code, Codex và Antigravity">
+        <div class="box">
+          <span class="label">Nguồn · Bạn chỉnh sửa</span>
+          <ul class="files">
+            <li>AGENTS.md</li>
+            <li>agents/manifest.json</li>
+            <li>agents/&lt;name&gt;.md</li>
+            <li>skills/&lt;name&gt;/SKILL.md</li>
+          </ul>
+        </div>
+        <div class="arrow" aria-hidden="true">sync-agents.mjs<span class="line"></span></div>
+        <div class="targets">
+          <div class="target"><strong>Claude Code</strong><code>.claude/agents/ · .claude/skills/</code></div>
+          <div class="target"><strong>Codex</strong><code>.codex/agents/*.toml · .codex/skills/</code></div>
+          <div class="target"><strong>Antigravity</strong><code>.agents/skills/ (chuyển role thành skill)</code></div>
+        </div>
+      </div>
+      <p class="note">Chạy <code>node scripts/sync-agents.mjs --check</code> trong CI hoặc pre-commit hook: lệnh báo lỗi nếu config bị lệch khỏi nguồn.</p>
+    </div>
+  </section>
+
+  <section class="fit" aria-labelledby="fit-title" style="padding-top: 0;">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="fit-title">Bắt đầu với file. Nâng cấp khi có team.</h2>
+      </div>
+      <div class="grid two">
+        <article class="card">
+          <h3>Git Starter này</h3>
+          <p>Miễn phí, mở hoàn toàn. Cho một người, một máy. Board là Markdown trong Git, không cần server, không cần tài khoản.</p>
+        </article>
+        <article class="card">
+          <h3>Musher <span class="tag">Đang thử nghiệm</span></h3>
+          <p>Bản cho đội nhóm, khi có thêm người, nhiều agent chạy song song hoặc cần phân quyền. Vẫn đang thử nghiệm. Playbook, rubric và sub-agent dự kiến giữ nguyên, chỉ đổi nơi board nằm.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="final" aria-labelledby="final-title">
+    <div class="wrap">
+      <h2 id="final-title">Cho các agent một team để làm việc</h2>
+      <p>Tạo workspace từ template, bật coding agent trong <code>management/</code>, và mở ticket đầu tiên.</p>
+      <div class="ctas">
+        <a class="btn primary" href="https://github.com/ogamic/harness-starter-git-based/generate">Dùng template này</a>
+        <a class="btn" href="https://github.com/ogamic/harness-starter-git-based/wiki/Quickstart-vi">Đọc Quickstart</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Giấy phép MIT © 2026 Kevin Nguyen · <a href="https://hikevin.me">hikevin.me</a></span>
+    <span><a href="https://github.com/ogamic/harness-starter-git-based">github.com/ogamic/harness-starter-git-based</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
